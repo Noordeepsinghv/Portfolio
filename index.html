@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noordeep Singh</title>
-    <link rel="icon" type="image/webp" href="assets/images/profile.webp" >
+    <link rel="icon" type="image/webp" href="assets/images/profile.webp">
     <link rel="stylesheet" href="assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
     <header>
         <div id="email-block">
             <img src="assets/images/profile.webp" alt="IMG" id="header-img">
-            <div id="email">
+            <button id="email" type="button" aria-label="Copy email address">
                 noordeep.tech@gmail.com
-            </div>
+            </button>
         </div>
         <div id="links-block">
-            <a href="https://www.linkedin.com/in/noordeep-singh-9b6608282/" id="linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/noordeep-singh-9b6608282/" id="linkedin" target="_blank"
+                rel="noopener noreferrer">LinkedIn</a>
             <a href="https://github.com/Noordeepsinghv" id="github" target="_blank" rel="noopener noreferrer">Github</a>
-            <a href="https://leetcode.com/u/eISTti3LNG/" id="leetcode" target="_blank" rel="noopener noreferrer">Leetcode</a>
+            <a href="https://leetcode.com/u/eISTti3LNG/" id="leetcode" target="_blank"
+                rel="noopener noreferrer">Leetcode</a>
+            <button id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"
+                title="Toggle color theme">
+                <span aria-hidden="true"></span>
+            </button>
         </div>
     </header>
     <main>
@@ -30,16 +38,138 @@
                 </span> <br>
                 <span class="second-line">I'm a </span> <span class="highlight">2nd Year Student</span>
                 <span>at</span> <br>
-                <abbr class="highlight institution" title="Shaheed Bhagat Singh State University" tabindex="0">SBSSU</abbr>
+                <abbr class="highlight institution" title="Shaheed Bhagat Singh State University"
+                    tabindex="0">SBSSU</abbr>
             </div>
             <div id="intro-image-frame">
-                <img src="assets/images/headShort.webp" alt="Portrait of Noordeep Singh" id="intro-img">
+                <img src="assets/images/HeadShortTransparent.webp" alt="Portrait of Noordeep Singh" id="intro-img">
             </div>
         </div>
     </main>
+    <section id="about" aria-labelledby="about-title">
+        <div class="section-heading">
+            <span class="section-kicker">A little more</span>
+            <h2 id="about-title">About me</h2>
+        </div>
+        <div class="about-content">
+            <p>
+                Currently pursuing a B.Tech in Computer Science and Engineering. Beyond my coursework, I like turning my
+                ideas and imagination into useful solutions. I'm always learning new technologies and aiming to improve
+                1% every day.
+            </p>
+            <dl class="about-details">
+                <div>
+                    <dt>Currently</dt>
+                    <dd>Learning and building</dd>
+                </div>
+                <div>
+                    <dt>Focus</dt>
+                    <dd>Logic Building</dd>
+                    <dd>Web development</dd>
+                </div>
+                <div>
+                    <dt>Open to</dt>
+                    <dd>New ideas and conversations</dd>
+                </div>
+            </dl>
+        </div>
+    </section>
+    <section id="projects" aria-labelledby="projects-title">
+        <div class="projects-heading">
+            <div>
+                <span class="section-kicker">Selected work</span>
+                <h2 id="projects-title">Projects</h2>
+            </div>
+            <p>Small, focused builds that show how I think, learn, and solve problems.</p>
+        </div>
+        <div class="projects-grid">
+            <article class="project-card project-card-featured">
+                <span class="project-number">01</span>
+                <h3> Rock Paper Scissors with Markov-Chain AI </h3>
+                <p>A C++ terminal game where the computer learns your habits instead of playing randomly. It builds a
+                    table of how often each of your moves follows another, predicts your next move from your last one,
+                    and plays the counter. Move history is saved to JSON, so the AI keeps learning across sessions.</p>
+                <ul class="project-tags" aria-label="Technologies used">
+                    <li>C++</li>
+                    <li>Markov chain</li>
+                    <li>JSON (nlohmann/json)</li>
+                </ul>
+                <div class="project-links">
+                    <!-- <a href="index.html" target="_blank"
+                        rel="noopener noreferrer">Live <span aria-hidden="true">↗</span></a> -->
+                    <a href="https://github.com/Noordeepsinghv/rock-paper-scissors" target="_blank"
+                        rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+            <article class="project-card project-card-featured">
+                <span class="project-number">02</span>
+                <h3>Mini Projects</h3>
+                <p>A collection of small front-end projects built with HTML, CSS, and JavaScript to practice DOM
+                    manipulation and event handling. Includes a working calculator, a simple interest calculator, and a
+                    background color switcher, each deployed on GitHub Pages.</p>
+                <ul id="mini-project-links">
+                    <li><a href="https://noordeepsinghv.github.io/Mini-Projects/Calculator/index.html" target="_blank"
+                            rel="noopener noreferrer">Calculator ↗</a>
+                    </li>
+                    <li><a href="https://noordeepsinghv.github.io/Mini-Projects/Simple%20Interest%20Calculator/index.html
+
+" target="_blank" rel="noopener noreferrer">Simple Interest Calculator ↗</a></li>
+                    <li><a href="https://noordeepsinghv.github.io/Mini-Projects/Back-Color-Switcher/backColorSwitcher.html"
+                            target="_blank" rel="noopener noreferrer">Color
+                            Switcher ↗</a></li>
+                </ul>
+                <ul class="project-tags" aria-label="Technologies used">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                </ul>
+                <div class="project-links">
+                    <!-- <a href="index.html" target="_blank"
+                        rel="noopener noreferrer">Live <span aria-hidden="true">↗</span></a> -->
+                    <a href="https://github.com/Noordeepsinghv/Mini-Projects" target="_blank"
+                        rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+            <article class="project-card">
+                <span class="project-number">03</span>
+                <h3>Tic-Tac-Toe</h3>
+                <p>A browser-based Tic-Tac-Toe game built with HTML, CSS, and vanilla JavaScript. My first game project,
+                    where I practiced game state handling and win detection.</p>
+                <ul class="project-tags" aria-label="Technologies used">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://noordeepsinghv.github.io/tic-tac-toe/" target="_blank"
+                        rel="noopener noreferrer">Live <span aria-hidden="true">↗</span></a>
+                    <a href="https://github.com/Noordeepsinghv/tic-tac-toe" target="_blank"
+                        rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+            <article class="project-card">
+                <span class="project-number">04</span>
+                <h3>This portfolio</h3>
+                <p>Hand-coded, mobile-first personal site built with HTML, CSS, and vanilla JavaScript, using
+                    self-hosted fonts and deployed on GitHub Pages</p>
+                <ul class="project-tags" aria-label="Technologies used">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                </ul>
+                <div class="project-links">
+                    <!-- <a href="index.html" target="_blank" rel="noopener noreferrer">Live <span
+                            aria-hidden="true">↗</span></a> -->
+                    <a href="https://github.com/Noordeepsinghv/Portfolio" target="_blank"
+                        rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+        </div>
+    </section>
     <footer>
 
     </footer>
     <script src="assets/js/script.js" defer></script>
 </body>
+
 </html>
