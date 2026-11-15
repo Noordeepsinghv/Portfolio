@@ -72,17 +72,15 @@ if (touchDevice.matches) {
 		entries.forEach((entry) => {
 			entry.target.classList.toggle("in-view", entry.isIntersecting);
 		});
-	}, { threshold: 0.2 });
+	}, { threshold: 1 });
 	let tiltFramePending = false;
 
 	scrollCards.forEach((card) => cardObserver.observe(card));
 
 	const updateImageTilt = () => {
-		const imageBounds = introImageFrame.getBoundingClientRect();
-		const imageCenter = imageBounds.top + imageBounds.height / 2;
-		const viewportCenter = window.innerHeight / 2;
-		const distanceFromCenter = (imageCenter - viewportCenter) / viewportCenter;
-		const tilt = Math.max(-2, Math.min(7, 4 - distanceFromCenter * 5));
+		const scrollRange = Math.max(1, window.innerHeight * 1.25);
+		const scrollProgress = Math.min(1, Math.max(0, window.scrollY / scrollRange));
+		const tilt = Math.sin(scrollProgress * Math.PI) * 12;
 
 		introImageFrame.style.setProperty("--scroll-tilt", `${tilt}deg`);
 		introImageFrame.classList.add("is-scroll-active");

@@ -23,6 +23,7 @@
     --theme-duration: 280ms;
     --theme-ease: ease;
     --interaction-duration: 180ms;
+    --intro-frame-width: 230px;
 }
 
 body[data-theme="dark"] {
@@ -178,22 +179,32 @@ header {
 }
 
 #intro-image-frame {
+    --tilt: 4deg;
+    --lift: 0px;
+    --shadow-x: calc(var(--intro-frame-width) * 0.05);
+    --shadow-y: calc(var(--intro-frame-width) * 0.05);
+
     position: relative;
-    flex: 0 0 230px;
+    flex: 0 0 var(--intro-frame-width);
+    width: var(--intro-frame-width);
     padding: 6px;
     border: 1px solid var(--lavender-purple);
     background-color: var(--white);
-    box-shadow: 12px 12px 0 var(--golden-orange);
-    transform: rotate(4deg);
-    transition: background-color var(--theme-duration) var(--theme-ease), border-color var(--theme-duration) var(--theme-ease), transform var(--interaction-duration) var(--theme-ease), box-shadow var(--interaction-duration) var(--theme-ease), flex-basis var(--theme-duration) var(--theme-ease);
+    box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--golden-orange);
+    transform: rotate(var(--tilt)) translateY(var(--lift));
+    transition: background-color var(--theme-duration) var(--theme-ease),
+        border-color var(--theme-duration) var(--theme-ease),
+        transform var(--interaction-duration) var(--theme-ease),
+        box-shadow var(--interaction-duration) var(--theme-ease);
 }
 
+/* Tape scales with the frame */
 #intro-image-frame::before {
     position: absolute;
-    top: -10px;
-    left: 22px;
-    width: 58px;
-    height: 20px;
+    top: calc(var(--intro-frame-width) * -0.043);
+    left: calc(var(--intro-frame-width) * 0.096);
+    width: calc(var(--intro-frame-width) * 0.25);
+    height: calc(var(--intro-frame-width) * 0.087);
     background-color: rgba(15, 118, 110, 0.72);
     content: "";
     transform: rotate(-5deg);
@@ -211,19 +222,18 @@ header {
     transition: --image-fade var(--theme-duration) var(--theme-ease);
 }
 
-#intro-image-frame:hover,
-#intro-image-frame:focus-within {
-    box-shadow: 8px 16px 0 var(--golden-orange);
-    transform: rotate(-2deg) translateY(-6px);
-}
-
 @media (hover: none) and (pointer: coarse) {
     #intro-image-frame {
-        transform: rotate(var(--scroll-tilt, 4deg));
+        --tilt: var(--scroll-tilt, 4deg);
+        will-change: transform;
     }
 
     #intro-image-frame.is-scroll-active {
-        transform: rotate(var(--scroll-tilt, 4deg)) translateY(-4px);
+        --lift: -4px;
+        transition: transform 120ms linear,
+            box-shadow var(--interaction-duration) var(--theme-ease),
+            background-color var(--theme-duration) var(--theme-ease),
+            border-color var(--theme-duration) var(--theme-ease);
     }
 
     .skill-group.in-view,
@@ -233,6 +243,30 @@ header {
         transform: translateY(-4px);
     }
 }
+
+#intro-image-frame:hover,
+#intro-image-frame:focus-within {
+    box-shadow: calc(var(--intro-frame-width)/100*3) calc(var(--intro-frame-width)/100*7) 0 var(--golden-orange);
+    transform: rotate(-2deg) translateY(-6px);
+}
+
+/* Hover only on devices that really hover (no sticky hover on phones) */
+@media (hover: hover) and (pointer: fine) {
+    #intro-image-frame:hover {
+        --tilt: -2deg;
+        --lift: -6px;
+        --shadow-x: calc(var(--intro-frame-width) * 0.03);
+        --shadow-y: calc(var(--intro-frame-width) * 0.07);
+    }
+}
+
+/* Press feedback for mouse, touch and pen. Keep it after the hover rule. */
+#intro-image-frame:active {
+    --lift: -2px;
+    --shadow-x: calc(var(--intro-frame-width) * 0.02);
+    --shadow-y: calc(var(--intro-frame-width) * 0.03);
+}
+
 
 #intro-img {
     display: block;
@@ -273,7 +307,7 @@ header {
     gap: 40px;
 }
 
-.about-content > p {
+.about-content>p {
     max-width: 540px;
     color: var(--muted-text);
     font-size: 18px;
@@ -325,7 +359,7 @@ header {
     line-height: 1.1;
 }
 
-.skills-heading > p {
+.skills-heading>p {
     max-width: 360px;
     color: var(--muted-text);
     font-size: 15px;
@@ -385,7 +419,7 @@ header {
     line-height: 1.2;
 }
 
-.skill-group > p {
+.skill-group>p {
     max-width: 360px;
     color: var(--muted-text);
     font-size: 14px;
@@ -430,7 +464,7 @@ header {
     line-height: 1.1;
 }
 
-.projects-heading > p {
+.projects-heading>p {
     max-width: 360px;
     color: var(--muted-text);
     font-size: 15px;
@@ -479,7 +513,7 @@ header {
     line-height: 1.2;
 }
 
-.project-card > p {
+.project-card>p {
     max-width: 420px;
     color: var(--muted-text);
     font-size: 15px;
@@ -493,12 +527,12 @@ header {
     color: var(--muted-text);
 }
 
-#mini-project-links > li > a {
+#mini-project-links>li>a {
     color: var(--muted-text);
     text-decoration: none;
 }
 
-#mini-project-links > li > a:hover {
+#mini-project-links>li>a:hover {
     color: var(--lavender-purple);
     text-decoration: underline;
 }
@@ -564,7 +598,7 @@ header {
     line-height: 1.1;
 }
 
-.contact-heading > p {
+.contact-heading>p {
     max-width: 360px;
     color: var(--muted-text);
     font-size: 15px;
@@ -784,6 +818,10 @@ header {
 }
 
 @media (max-width: 960px) {
+    :root {
+        --intro-frame-width: 190px;
+    }
+
     #intro-layout {
         gap: 32px;
         padding: 64px 8%;
@@ -796,14 +834,13 @@ header {
     #intro .first-line {
         font-size: 46px;
     }
-
-    #intro-image-frame {
-        flex-basis: 190px;
-        width: 190px;
-    }
 }
 
 @media (max-width: 600px) {
+    :root {
+        --intro-frame-width: 110px;
+    }
+
     header {
         grid-template-columns: 1fr;
         align-items: flex-start;
@@ -837,14 +874,6 @@ header {
 
     #intro-image-frame {
         align-self: center;
-        flex: 0 0 110px;
-        width: 110px;
-    }
-
-    #intro-image-frame::before {
-        left: 14px;
-        width: 42px;
-        height: 16px;
     }
 
     #about {
@@ -917,7 +946,10 @@ header {
 }
 
 @media (max-width: 380px) {
-    
+    :root {
+        --intro-frame-width: 96px;
+    }
+
     #intro {
         font-size: 18px;
     }
@@ -925,12 +957,17 @@ header {
     #intro .first-line {
         font-size: 27px;
     }
+}
 
-    #intro-image-frame {
-        flex-basis: 96px;
-        width: 96px;
+@media (max-width: 380px) and (hover: hover) {
+
+    #intro-image-frame:active,
+    #intro-image-frame:focus-within,
+    #intro-image-frame:hover {
+        box-shadow: calc((var(--intro-frame-width)/100*2)) calc((var(--intro-frame-width)/100*4)) 0 var(--golden-orange);
     }
 }
+
 
 
 /* CSS HEX */
