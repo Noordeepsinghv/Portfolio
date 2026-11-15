@@ -7,14 +7,18 @@ const setTheme = (theme) => {
 	themeToggle.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
 };
 
-const savedTheme = localStorage.getItem("portfolio-theme");
-const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-setTheme(savedTheme || preferredTheme);
+const deviceTheme = window.matchMedia("(prefers-color-scheme: dark)");
+const getDeviceTheme = () => deviceTheme.matches ? "dark" : "light";
+
+setTheme(getDeviceTheme());
 
 themeToggle.addEventListener("click", () => {
 	const nextTheme = document.body.dataset.theme === "dark" ? "light" : "dark";
 	setTheme(nextTheme);
-	localStorage.setItem("portfolio-theme", nextTheme);
+});
+
+deviceTheme.addEventListener("change", () => {
+	setTheme(getDeviceTheme());
 });
 
 emailButton.addEventListener("click", async () => {
@@ -33,3 +37,64 @@ emailButton.addEventListener("click", async () => {
 		}, 1400);
 	}
 });
+
+const contactForm = document.querySelector("#contact-form");
+const contactStatus = document.querySelector("#contact-status");
+
+contactForm.addEventListener("submit", (event) => {
+	event.preventDefault();
+
+	const formData = new FormData(contactForm);
+	const subject = `Portfolio message from ${formData.get("name")}`;
+	const body = `Name: ${formData.get("name")}\nEmail: ${formData.get("email")}\n\n${formData.get("message")}`;
+	const mailto = `mailto:noordeep.tech@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+	contactStatus.textContent = "Opening your email app...";
+	window.location.href = mailto;
+});
+
+const gotoTopButton = document.querySelector("#goto-top-button");
+
+window.addEventListener("scroll", () => {
+    gotoTopButton.classList.toggle("is-scrolled", window.scrollY > 50);
+});
+
+gotoTopButton.addEventListener("click", () => {
+	window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+const touchDevice = window.matchMedia("(hover: none) and (pointer: coarse)");
+
+if (touchDevice.matches) {
+	const introImageFrame = document.querySelector("#intro-image-frame");
+	const scrollCards = document.querySelectorAll(".skill-group, .project-card");
+	const cardObserver = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			entry.target.classList.toggle("in-view", entry.isIntersecting);
+		});
+	}, { threshold: 0.2 });
+	let tiltFramePending = false;
+
+	scrollCards.forEach((card) => cardObserver.observe(card));
+
+	const updateImageTilt = () => {
+		const imageBounds = introImageFrame.getBoundingClientRect();
+		const imageCenter = imageBounds.top + imageBounds.height / 2;
+		const viewportCenter = window.innerHeight / 2;
+		const distanceFromCenter = (imageCenter - viewportCenter) / viewportCenter;
+		const tilt = Math.max(-2, Math.min(7, 4 - distanceFromCenter * 5));
+
+		introImageFrame.style.setProperty("--scroll-tilt", `${tilt}deg`);
+		introImageFrame.classList.add("is-scroll-active");
+		tiltFramePending = false;
+	};
+
+	window.addEventListener("scroll", () => {
+		if (!tiltFramePending) {
+			window.requestAnimationFrame(updateImageTilt);
+			tiltFramePending = true;
+		}
+	}, { passive: true });
+
+	updateImageTilt();
+}
