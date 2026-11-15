@@ -84,7 +84,10 @@ header {
 }
 
 #intro {
+    min-width: 0;
+    flex: 1 1 auto;
     max-width: 720px;
+    overflow-wrap: break-word;
     color: var(--shadow-grey);
     font-size: 42px;
     font-weight: 700;
@@ -201,6 +204,26 @@ header {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+}
+
+@media (max-width: 900px) {
+    #intro-layout {
+        gap: 32px;
+        padding: 64px 8%;
+    }
+
+    #intro {
+        font-size: 34px;
+    }
+
+    #intro .first-line {
+        font-size: 46px;
+    }
+
+    #intro-image-frame {
+        flex-basis: 190px;
+        width: 190px;
+    }
 }
 
 #about {
@@ -489,33 +512,40 @@ header {
     }
 
     #links-block {
+        max-width: 100%;
         justify-self: start;
-    }
-
-    #links-block {
         flex-wrap: wrap;
         gap: 8px 14px;
     }
 
     #intro {
-        font-size: 30px;
+        flex-basis: 0;
+        font-size: 20px;
     }
 
     #intro .first-line {
-        font-size: 38px;
+        max-width: 100%;
+        font-size: 32px;
+        overflow-wrap: anywhere;
     }
 
     #intro-layout {
-        align-items: flex-start;
-        flex-direction: column-reverse;
-        gap: 48px;
-        padding: 64px 10%;
+        align-items: center;
+        flex-direction: row;
+        gap: 16px;
+        padding: 56px 6%;
     }
 
     #intro-image-frame {
         align-self: center;
-        flex-basis: 190px;
-        width: 190px;
+        flex: 0 0 110px;
+        width: 110px;
+    }
+
+    #intro-image-frame::before {
+        left: 14px;
+        width: 42px;
+        height: 16px;
     }
 
     #about {
@@ -545,6 +575,21 @@ header {
 
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 380px) {
+    #intro {
+        font-size: 18px;
+    }
+
+    #intro .first-line {
+        font-size: 27px;
+    }
+
+    #intro-image-frame {
+        flex-basis: 96px;
+        width: 96px;
     }
 }
 
