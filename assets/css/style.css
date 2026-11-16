@@ -71,14 +71,17 @@ header {
 }
 
 #header-img {
-    width: 34px;
-    height: 34px;
+    --angle : 0deg;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: 2px solid var(--blue-spruce);
     padding: 2px;
     background-color: var(--white);
     margin-right: 10px;
     display: inline-block;
+    rotate: var(--angle);
+    transition: rotate var(--interaction-duration) var(--theme-ease), background-color var(--theme-duration) var(--theme-ease), border-color var(--theme-duration) var(--theme-ease);
 }
 
 #email {
@@ -222,7 +225,7 @@ header {
     transition: --image-fade var(--theme-duration) var(--theme-ease);
 }
 
-@media (hover: none) and (pointer: coarse) {
+@media (hover: none) and (any-pointer: coarse) {
     #intro-image-frame {
         --tilt: var(--scroll-tilt, 4deg);
         will-change: transform;

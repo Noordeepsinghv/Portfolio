@@ -1,5 +1,6 @@
 const emailButton = document.querySelector("#email");
 const themeToggle = document.querySelector("#theme-toggle");
+const headerAvatar = document.querySelector("#header-img")
 
 const setTheme = (theme) => {
 	document.body.dataset.theme = theme;
@@ -56,14 +57,14 @@ contactForm.addEventListener("submit", (event) => {
 const gotoTopButton = document.querySelector("#goto-top-button");
 
 window.addEventListener("scroll", () => {
-    gotoTopButton.classList.toggle("is-scrolled", window.scrollY > 50);
+	gotoTopButton.classList.toggle("is-scrolled", window.scrollY > 50);
 });
 
 gotoTopButton.addEventListener("click", () => {
 	window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-const touchDevice = window.matchMedia("(hover: none) and (pointer: coarse)");
+const touchDevice = window.matchMedia("(hover: none) and (any-pointer: coarse)");
 
 if (touchDevice.matches) {
 	const introImageFrame = document.querySelector("#intro-image-frame");
@@ -96,3 +97,17 @@ if (touchDevice.matches) {
 
 	updateImageTilt();
 }
+
+const rotateAvatar = () => {
+	const pageHeight = document.documentElement.scrollHeight;
+	const maxScroll = Math.max(1, pageHeight - window.innerHeight);
+	const scrollDistance = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+	const scrollAngle = scrollDistance * 360;
+	headerAvatar.style.setProperty("--angle", `${scrollAngle}deg`);
+};
+
+window.addEventListener("scroll", () => {
+	window.requestAnimationFrame(rotateAvatar);
+});
+
+rotateAvatar();
